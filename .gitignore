@@ -1,0 +1,16 @@
+.DS_Store
+.idea
+.RData
+.Renviron
+.Rhistory
+.Rproj.user
+.Ruserdata
+build.R
+data.csv
+doc
+docs
+foo.R
+Meta
+rsconnect
+survey.html
+survey_files
