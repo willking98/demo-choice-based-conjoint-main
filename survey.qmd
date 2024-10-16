@@ -1,0 +1,940 @@
+---
+echo: false
+warning: false
+---
+
+```{r}
+library(surveydown)
+```
+
+::: {#welcome .sd-page}
+# Welcome to our survey!
+
+This online survey contains a series of questions and exercises about health and quality of life. In some questions, we will ask about your own health, and to compare different health problems. In other questions, we will ask them to make choices between different scenarios involving poor health and disability. There are no right or wrong answers - we are just interested in your opinion.
+
+```{r}
+sd_next()
+```
+:::
+
+::: {#consent .sd-page}
+# Consent
+
+This survey is being conducted by researchers at Newcastle University. We will not be collecting any identifying data, such as your name or address. The whole survey will take approximately 10 minutes to complete. Your participation is voluntary and you may stop the survey at any time.
+
+If you would like to participate, please answer the following questions:
+
+```{r}
+sd_question(
+ type  = 'mc',
+ id    = 'consent',
+ label = "I provide consent to participate in this survey",
+ option = c(
+   'Yes' = 'yes',
+   'No'  = 'no'
+ )
+)
+
+sd_question(
+  type  = 'mc',
+  id    = 'consent_understand',
+  label = "I have read and understand the above information",
+  option = c(
+    'Yes' = 'yes',
+    'No'  = 'no'
+  )
+)
+```
+
+```{r}
+sd_next()
+```
+:::
+
+::: {#screening .sd-page}
+# Attention Check
+
+Please click **"Red"**, if you choose "Blue" you'll be screened out.
+
+```{r}
+sd_question(
+  type  = 'mc',
+  id    = 'attention_screenout',
+  label = "Please select the red option:",
+  option = c(
+    'Blue' = 'blue',
+    'Red'  = 'red'
+  )
+)
+
+sd_next()
+```
+:::
+
+::: {#educational .sd-page}
+# Information Page
+
+In this survey we'd like you to consider a scenario in which you can choose between two health states with different qualities. Each health state is represented by 7 areas of quality of life that we think are important to young people.
+
+Within each area of quality of life there are 5 levels which range from **(Never, Almost never, Sometimes, Often and Always)**. Let's learn about these 7 areas of quality of life.
+
+## Tiredness
+
+-   I **never** get tired.
+-   I **almost never** get tired.
+-   I **sometimes** get tired.
+-   I **often** get tired.
+-   I **always** get tired.
+
+## Walking
+
+-   I **never** struggle to keep up when I am walking around with others.
+-   I **almost never** struggle to keep up when I am walking around with others.
+-   I **sometimes** struggle to keep up when I am walking around with others.
+-   I **often** struggle to keep up when I am walking around with others.
+-   I **always** struggle to keep up when I am walking around with others.
+
+## Sports
+
+-   I **never** avoid doing sports.
+-   I **almost never** avoid doing sports.
+-   I **sometimes** avoid doing sports.
+-   I **often** avoid doing sports.
+-   I **always** avoid doing sports.
+
+## Concentration
+
+-   I **never** struggle to concentrate on my studies/work.
+-   I **almost never** struggle to concentrate on my studies/work.
+-   I **sometimes** struggle to concentrate on my studies/work.
+-   I **often** struggle to concentrate on my studies/work.
+-   I **always** struggle to concentrate on my studies/work.
+
+## Embarrassment
+
+-   I **never** feel embarrassed shopping for clothes.
+-   I **almost never** feel embarrassed shopping for clothes.
+-   I **sometimes** struggle to concentrate on my studies/work.
+-   I **often** feel embarrassed shopping for clothes.
+-   I **always** feel embarrassed shopping for clothes.
+
+## Unhappiness
+
+-   I **never** feel unhappy because I am unable to do the same things as others.
+-   I **almost never** feel unhappy because I am unable to do the same things as others.
+-   I **sometimes** feel unhappy because I am unable to do the same things as others.
+-   I **often** feel unhappy because I am unable to do the same things as others.
+-   I **always** feel unhappy because I am unable to do the same things as others.
+
+## Treated differently
+
+-   People **never** treat me differently when I go out.
+-   People **almost never** treat me differently when I go out.
+-   People **sometimes** treat me differently when I go out.
+-   People **often** treat me differently when I go out.
+-   People **always** treat me differently when I go out.
+
+```{r}
+sd_next()
+```
+:::
+
+::: {#waite_descriptive .sd-page}
+# Your health
+
+Using the areas of health we have shown you please answer the following questions about your health. Your answer to these questions will be a health state.
+
+## What is your current health state?
+
+```{r}
+
+sd_question(
+ type   = 'mc_buttons',
+ id     = 'tiredness',
+ label  = "Tiredness",
+ option = c("I **never** get tired" = "never", "I **almost never** get tired" = "almostnever", "I **sometimes** get tired" = "sometimes", "I **often** get tired" = "often", "I **always** get tired" = "always"),
+ direction = "vertical"
+)
+
+sd_question(
+ type   = 'mc_buttons',
+ id     = 'walking',
+ label  = "Walking",
+ option = c("I **never** struggle to keep up when I am walking around with others" = "never", "I **almost never** struggle to keep up when I am walking around with others" = "almostnever", "I **sometimes** struggle to keep up when I am walking around with others" = "sometimes", "I **often** struggle to keep up when I am walking around with others" = "often", "I **always** struggle to keep up when I am walking around with others" = "always"),
+ direction = "vertical"
+)
+
+sd_question(
+ type   = 'mc_buttons',
+ id     = 'sports',
+ label  = "Sports",
+ option = c("I **never** avoid doing sports" = "never", "I **almost never** avoid doing sports" = "almostnever", "I **sometimes** avoid doing sports" = "sometimes", "I **often** avoid doing sports" = "often", "I **always** avoid doing sports" = "always"),
+ direction = "vertical"
+)
+
+sd_question(
+ type   = 'mc_buttons',
+ id     = 'concentration',
+ label  = "Concentration",
+ option = c("I **never** struggle to concentrate on my studies/work" = "never", "I **almost never** struggle to concentrate on my studies/work" = "almostnever", "I **sometimes** struggle to concentrate on my studies/work" = "sometimes", "I **often** struggle to concentrate on my studies/work" = "often", "I **always** struggle to concentrate on my studies/work" = "always"),
+ direction = "vertical"
+)
+
+sd_question(
+ type   = 'mc_buttons',
+ id     = 'embarrassment',
+ label  = "Embarrassment",
+ option = c("I **never** feel embarrassed shopping for clothes" = "never", "I **almost never** feel embarrassed shopping for clothes" = "almostnever", "I **sometimes** feel embarrassed shopping for clothes" = "sometimes", "I **often** feel embarrassed shopping for clothes" = "often", "I **always** feel embarrassed shopping for clothes" = "always"),
+ direction = "vertical"
+)
+
+sd_question(
+ type   = 'mc_buttons',
+ id     = 'unhappiness',
+ label  = "Unhappiness",
+ option = c("I **never** feel unhappy because I am unable to do the same things as others" = "never", "I **almost never** feel unhappy because I am unable to do the same things as others" = "almostnever", "I **sometimes** feel unhappy because I am unable to do the same things as others" = "sometimes", "I **often** feel unhappy because I am unable to do the same things as others" = "often", "I **always** feel unhappy because I am unable to do the same things as others" = "always"),
+ direction = "vertical"
+)
+
+sd_question(
+ type   = 'mc_buttons',
+ id     = 'treated',
+ label  = "Being treated differently",
+ option = c("People **never** treat me differently when I go out" = "never", "People **almost never** treat me differently when I go out" = "almostnever", "People **sometimes** treat me differently when I go out" = "sometimes", "People **often** treat me differently when I go out" = "often", "People **always** treat me differently when I go out" = "always"),
+ direction = "vertical"
+)
+
+sd_next()
+```
+:::
+
+::: {#cbc_practice .sd-page}
+# Practice Question
+
+Your response to the previous questions describes one health state. We'll now begin the choice tasks. This first question is a practice question. Please read through the health state carefully and select the best and worst option.
+
+::: callout-note
+There are no right or wrong answers. Please select the option you think is the best, followed by the option you think is the worst.
+:::
+
+
+```{r}
+# Define the option vector
+
+# Change the names of each element to display plain text without extra whitespace
+sd_question(
+  type   = "matrix",
+  id     = "cbc_practice_transpose",
+  label  = "Select the **best** and **worst** option",
+  row    = c(
+    "Best" = "best",
+    "Worst"  = "worst"
+    ),
+  option = c(
+    "tired_3" = "tired_3",
+    "walking_1" = "walking_1",
+    "sports_1" = "sports_1",
+    "concentration_4" = "concentration_4",
+    "embarrassed_2" = "embarrassed_2",
+    "unhappiness_5" = "unhappiness_5",
+    "treated_4" = "treated_4"
+  )
+)
+
+
+# sd_question(
+#   type   = "matrix",
+#   id     = "cbc_practice_best",
+#   label  = "Select the **best** and **worst** option",
+#   row    = c(
+#     "I **sometimes** get tired" = "tired_3",
+#     "I **never** struggle to keep up when I am walking around with others" = "walking_1",
+#     "I **never** avoid doing sports" = "sports_1",
+#     "I **often** struggle to concentrate on my studies/work" = "concentration_4",
+#     "I **almost never** feel embarrassed shopping for clothes" = "embarrassed_2",
+#     "I **always** feel unhappy because I am unable to do the same things as others" = "unhappiness_5",
+#     "People **often** treat me differently when I go out" = "treated_4"
+#  ),
+#   option = c(
+#     "Best" = "best",
+#     "Worst"  = "worst"
+#   )
+# )
+
+sd_next()
+
+```
+:::
+
+
+::: {#cbc_intro .sd-page}
+# Main Questions
+
+Great work!
+
+We will now show you 10 sets of choice questions starting on the next page. Please take your time to read through each question carefully. Remember there are no right or wrong answers!
+
+```{r}
+sd_next()
+```
+:::
+
+::: {#cbc_q1 .sd-page}
+# Question 1
+
+```{r}
+# sd_question(
+#   type   = 'matrix',
+#   id     = 'cbc_q1',
+#   label  = "Select the **best** and **worst** option",
+#   row = c(
+#     "I **always** get tired" = "tired_5",
+#     "I **never** struggle to keep up when I am walking around with others" = "walking_1",
+#     "I **almost never** avoid doing sports" = "sports_2",
+#     "I **sometimes** struggle to concentrate on my studies/work" = "concentration_3",
+#     "I **often** feel embarrassed shopping for clothes" = "embarrassed_4",
+#     "I **often** feel unhappy because I am unable to do the same things as others" = "unhappiness_4",
+#     "People **always** treat me differently when I go out" = "treated_5"
+#   ),
+#   option = c(
+#     "Best" = "best",
+#     "Worst"  = "worst"
+#   )
+# )
+sd_question(
+  type   = "matrix",
+  id     = "cbc_practice_transpose",
+  label  = "Select the **best** and **worst** option",
+  row    = c(
+    "Best" = "best",
+    "Worst"  = "worst"
+    ),
+  option = c(
+    "tired_3" = "tired_3",
+    "walking_1" = "walking_1",
+    "sports_1" = "sports_1",
+    "concentration_4" = "concentration_4",
+    "embarrassed_2" = "embarrassed_2",
+    "unhappiness_5" = "unhappiness_5",
+    "treated_4" = "treated_4"
+  )
+)
+sd_next()
+```
+:::
+
+::: {#cbc_q2 .sd-page}
+# Question 2
+
+```{r}
+# sd_question(
+#   type   = 'matrix',
+#   id     = 'cbc_q2',
+#   label  = "Select the **best** and **worst** option",
+#   row = c(
+#     "I **always** get tired" = "tired_5",
+#     "I **sometimes** struggle to keep up when I am walking around with others" = "walking_3",
+#     "I **almost never** avoid doing sports" = "sports_2",
+#     "I **almost never** struggle to concentrate on my studies/work" = "concentration_2",
+#     "I **sometimes** feel embarrassed shopping for clothes" = "embarrassed_3",
+#     "I **always** feel unhappy because I am unable to do the same things as others" = "unhappiness_5",
+#     "People **never** treat me differently when I go out" = "treated_1"
+#   ),
+#   option = c(
+#     "Best" = "best",
+#     "Worst"  = "worst"
+#   )
+# )
+sd_question(
+  type   = "matrix",
+  id     = "cbc_practice_transpose",
+  label  = "Select the **best** and **worst** option",
+  row    = c(
+    "Best" = "best",
+    "Worst"  = "worst"
+    ),
+  option = c(
+    "tired_3" = "tired_3",
+    "walking_1" = "walking_1",
+    "sports_1" = "sports_1",
+    "concentration_4" = "concentration_4",
+    "embarrassed_2" = "embarrassed_2",
+    "unhappiness_5" = "unhappiness_5",
+    "treated_4" = "treated_4"
+  )
+)
+sd_next()
+```
+:::
+
+::: {#cbc_q3 .sd-page}
+# Question 3
+
+```{r}
+# sd_question(
+#   type   = 'matrix',
+#   id     = 'cbc_q3',
+#   label  = "Select the **best** and **worst** option",
+#   row = c(
+#     "I **often** get tired" = "tired_4",
+#     "I **never** struggle to keep up when I am walking around with others" = "walking_1",
+#     "I **often** avoid doing sports" = "sports_4",
+#     "I **sometimes** struggle to concentrate on my studies/work" = "concentration_3",
+#     "I **sometimes** feel embarrassed shopping for clothes" = "embarrassed_3",
+#     "I **almost never** feel unhappy because I am unable to do the same things as others" = "unhappiness_2",
+#     "People **never** treat me differently when I go out" = "treated_1"
+#   ),
+#   option = c(
+#     "Best" = "best",
+#     "Worst"  = "worst"
+#   )
+# )
+sd_question(
+  type   = "matrix",
+  id     = "cbc_practice_transpose",
+  label  = "Select the **best** and **worst** option",
+  row    = c(
+    "Best" = "best",
+    "Worst"  = "worst"
+    ),
+  option = c(
+    "tired_3" = "tired_3",
+    "walking_1" = "walking_1",
+    "sports_1" = "sports_1",
+    "concentration_4" = "concentration_4",
+    "embarrassed_2" = "embarrassed_2",
+    "unhappiness_5" = "unhappiness_5",
+    "treated_4" = "treated_4"
+  )
+)
+sd_next()
+```
+:::
+
+::: {#cbc_q4 .sd-page}
+# Question 4
+
+```{r}
+# sd_question(
+#   type   = 'matrix',
+#   id     = 'cbc_q4',
+#   label  = "Select the **best** and **worst** option",
+#   row = c(
+#     "I **often** get tired" = "tired_4",
+#     "I **often** struggle to keep up when I am walking around with others" = "walking_4",
+#     "I **often** avoid doing sports" = "sports_4",
+#     "I **often** struggle to concentrate on my studies/work" = "concentration_4",
+#     "I **often** feel embarrassed shopping for clothes" = "embarrassed_4",
+#     "I **often** feel unhappy because I am unable to do the same things as others" = "unhappiness_4",
+#     "People **often** treat me differently when I go out" = "treated_4"
+#   ),
+#   option = c(
+#     "Best" = "best",
+#     "Worst"  = "worst"
+#   )
+# )
+sd_question(
+  type   = "matrix",
+  id     = "cbc_practice_transpose",
+  label  = "Select the **best** and **worst** option",
+  row    = c(
+    "Best" = "best",
+    "Worst"  = "worst"
+    ),
+  option = c(
+    "tired_3" = "tired_3",
+    "walking_1" = "walking_1",
+    "sports_1" = "sports_1",
+    "concentration_4" = "concentration_4",
+    "embarrassed_2" = "embarrassed_2",
+    "unhappiness_5" = "unhappiness_5",
+    "treated_4" = "treated_4"
+  )
+)
+sd_next()
+```
+:::
+
+::: {#cbc_q5 .sd-page}
+# Question 5
+
+```{r}
+# sd_question(
+#   type   = 'matrix',
+#   id     = 'cbc_q5',
+#   label  = "Select the **best** and **worst** option",
+#   row = c(
+#     "I **often** get tired" = "tired_4",
+#     "I **almost never** struggle to keep up when I am walking around with others" = "walking_2",
+#     "I **never** avoid doing sports" = "sports_1",
+#     "I **never** struggle to concentrate on my studies/work" = "concentration_1",
+#     "I **almost never** feel embarrassed shopping for clothes" = "embarrassed_2",
+#     "I **often** feel unhappy because I am unable to do the same things as others" = "unhappiness_4",
+#     "People **always** treat me differently when I go out" = "treated_5"
+#   ),
+#   option = c(
+#     "Best" = "best",
+#     "Worst"  = "worst"
+#   )
+# )
+sd_question(
+  type   = "matrix",
+  id     = "cbc_practice_transpose",
+  label  = "Select the **best** and **worst** option",
+  row    = c(
+    "Best" = "best",
+    "Worst"  = "worst"
+    ),
+  option = c(
+    "tired_3" = "tired_3",
+    "walking_1" = "walking_1",
+    "sports_1" = "sports_1",
+    "concentration_4" = "concentration_4",
+    "embarrassed_2" = "embarrassed_2",
+    "unhappiness_5" = "unhappiness_5",
+    "treated_4" = "treated_4"
+  )
+)
+sd_next()
+```
+:::
+
+::: {#cbc_q6 .sd-page}
+# Question 6
+
+```{r}
+# sd_question(
+#   type   = 'matrix',
+#   id     = 'cbc_q6',
+#   label  = "Select the **best** and **worst** option",
+#   row = c(
+#     "I **never** get tired" = "tired_1",
+#     "I **almost never** struggle to keep up when I am walking around with others" = "walking_2",
+#     "I **sometimes** avoid doing sports" = "sports_3",
+#     "I **often** struggle to concentrate on my studies/work" = "concentration_4",
+#     "I **always** feel embarrassed shopping for clothes" = "embarrassed_5",
+#     "I **always** feel unhappy because I am unable to do the same things as others" = "unhappiness_5",
+#     "People **never** treat me differently when I go out" = "treated_1"
+#   ),
+#   option = c(
+#     "Best" = "best",
+#     "Worst"  = "worst"
+#   )
+# )
+sd_question(
+  type   = "matrix",
+  id     = "cbc_practice_transpose",
+  label  = "Select the **best** and **worst** option",
+  row    = c(
+    "Best" = "best",
+    "Worst"  = "worst"
+    ),
+  option = c(
+    "tired_3" = "tired_3",
+    "walking_1" = "walking_1",
+    "sports_1" = "sports_1",
+    "concentration_4" = "concentration_4",
+    "embarrassed_2" = "embarrassed_2",
+    "unhappiness_5" = "unhappiness_5",
+    "treated_4" = "treated_4"
+  )
+)
+sd_next()
+```
+:::
+
+::: {#cbc_q7 .sd-page}
+# Question 7
+
+```{r}
+# sd_question(
+#   type   = 'matrix',
+#   id     = 'cbc_q7',
+#   label  = "Select the **best** and **worst** option",
+#   row = c(
+#     "I **always** get tired" = "tired_5",
+#     "I **often** struggle to keep up when I am walking around with others" = "walking_4",
+#     "I **sometimes** avoid doing sports" = "sports_3",
+#     "I **almost never** struggle to concentrate on my studies/work" = "concentration_2",
+#     "I **never** feel embarrassed shopping for clothes" = "embarrassed_1",
+#     "I **often** feel unhappy because I am unable to do the same things as others" = "unhappiness_4",
+#     "People **sometimes** treat me differently when I go out" = "treated_3"
+#   ),
+#   option = c(
+#     "Best" = "best",
+#     "Worst"  = "worst"
+#   )
+# )
+sd_question(
+  type   = "matrix",
+  id     = "cbc_practice_transpose",
+  label  = "Select the **best** and **worst** option",
+  row    = c(
+    "Best" = "best",
+    "Worst"  = "worst"
+    ),
+  option = c(
+    "tired_3" = "tired_3",
+    "walking_1" = "walking_1",
+    "sports_1" = "sports_1",
+    "concentration_4" = "concentration_4",
+    "embarrassed_2" = "embarrassed_2",
+    "unhappiness_5" = "unhappiness_5",
+    "treated_4" = "treated_4"
+  )
+)
+sd_next()
+```
+:::
+
+::: {#cbc_q8 .sd-page}
+# Question 8
+
+```{r}
+# sd_question(
+#   type   = 'matrix',
+#   id     = 'cbc_q8',
+#   label  = "Select the **best** and **worst** option",
+#   row = c(
+#     "I **almost never** get tired" = "tired_2",
+#     "I **sometimes** struggle to keep up when I am walking around with others" = "walking_3",
+#     "I **always** avoid doing sports" = "sports_5",
+#     "I **sometimes** struggle to concentrate on my studies/work" = "concentration_3",
+#     "I **almost never** feel embarrassed shopping for clothes" = "embarrassed_2",
+#     "I **often** feel unhappy because I am unable to do the same things as others" = "unhappiness_4",
+#     "People **never** treat me differently when I go out" = "treated_1"
+#   ),
+#   option = c(
+#     "Best" = "best",
+#     "Worst"  = "worst"
+#   )
+# )
+sd_question(
+  type   = "matrix",
+  id     = "cbc_practice_transpose",
+  label  = "Select the **best** and **worst** option",
+  row    = c(
+    "Best" = "best",
+    "Worst"  = "worst"
+    ),
+  option = c(
+    "tired_3" = "tired_3",
+    "walking_1" = "walking_1",
+    "sports_1" = "sports_1",
+    "concentration_4" = "concentration_4",
+    "embarrassed_2" = "embarrassed_2",
+    "unhappiness_5" = "unhappiness_5",
+    "treated_4" = "treated_4"
+  )
+)
+sd_next()
+```
+:::
+
+::: {#cbc_q9 .sd-page}
+# Question 9
+
+```{r}
+# sd_question(
+#   type   = 'matrix',
+#   id     = 'cbc_q9',
+#   label  = "Select the **best** and **worst** option",
+#   row = c(
+#     "I **sometimes** get tired" = "tired_3",
+#     "I **almost never** struggle to keep up when I am walking around with others" = "walking_2",
+#     "I **almost never** avoid doing sports" = "sports_2",
+#     "I **sometimes** struggle to concentrate on my studies/work" = "concentration_3",
+#     "I **always** feel embarrassed shopping for clothes" = "embarrassed_5",
+#     "I **never** feel unhappy because I am unable to do the same things as others" = "unhappiness_1",
+#     "People **often** treat me differently when I go out" = "treated_4"
+#   ),
+#   option = c(
+#     "Best" = "best",
+#     "Worst"  = "worst"
+#   )
+# )
+sd_question(
+  type   = "matrix",
+  id     = "cbc_practice_transpose",
+  label  = "Select the **best** and **worst** option",
+  row    = c(
+    "Best" = "best",
+    "Worst"  = "worst"
+    ),
+  option = c(
+    "tired_3" = "tired_3",
+    "walking_1" = "walking_1",
+    "sports_1" = "sports_1",
+    "concentration_4" = "concentration_4",
+    "embarrassed_2" = "embarrassed_2",
+    "unhappiness_5" = "unhappiness_5",
+    "treated_4" = "treated_4"
+  )
+)
+sd_next()
+```
+:::
+
+::: {#cbc_q10 .sd-page}
+# Question 10
+
+```{r}
+# sd_question(
+#   type   = 'matrix',
+#   id     = 'cbc_q10',
+#   label  = "Select the **best** and **worst** option",
+#   row = c(
+#     "I **sometimes** get tired" = "tired_3",
+#     "I **always** struggle to keep up when I am walking around with others" = "walking_5",
+#     "I **sometimes** avoid doing sports" = "sports_3",
+#     "I **almost never** struggle to concentrate on my studies/work" = "concentration_2",
+#     "I **almost never** feel embarrassed shopping for clothes" = "embarrassed_2",
+#     "I **never** feel unhappy because I am unable to do the same things as others" = "unhappiness_1",
+#     "People **always** treat me differently when I go out" = "treated_5"
+#   ),
+#   option = c(
+#     "Best" = "best",
+#     "Worst"  = "worst"
+#   )
+# )
+sd_question(
+  type   = "matrix",
+  id     = "cbc_practice_transpose",
+  label  = "Select the **best** and **worst** option",
+  row    = c(
+    "Best" = "best",
+    "Worst"  = "worst"
+    ),
+  option = c(
+    "tired_3" = "tired_3",
+    "walking_1" = "walking_1",
+    "sports_1" = "sports_1",
+    "concentration_4" = "concentration_4",
+    "embarrassed_2" = "embarrassed_2",
+    "unhappiness_5" = "unhappiness_5",
+    "treated_4" = "treated_4"
+  )
+)
+sd_next()
+```
+:::
+
+
+
+::: {#apple_knowledge .sd-page}
+# Survey Feedback
+
+Please take a minute to answer the following questions. We'd greatly appreciate your input.
+
+```{r}
+sd_question(
+  type  = 'mc',
+  id    = 'understand',
+  label = "It was easy to understand the questions I was asked.",
+  option = c(
+    'Strongly disagree'          = 'stronglydisagree',
+    'Somewhat disagree'          = 'somewhatdisagree',
+    'Neither agree nor disagree'    = 'neitheragreenordisagree',
+    'Somewhat agree'     = 'somewhatagree',
+    'Strongly agree' = 'stronglyagree'
+  ),
+)
+
+sd_question(
+  type  = 'mc',
+  id    = 'differences',
+  label = "I found it easy to tell the differences between the health states I was asked to think about.",
+  option = c(
+    'Strongly disagree'          = 'stronglydisagree',
+    'Somewhat disagree'          = 'somewhatdisagree',
+    'Neither agree nor disagree'    = 'neitheragreenordisagree',
+    'Somewhat agree'     = 'somewhatagree',
+    'Strongly agree' = 'stronglyagree'
+  ),
+)
+
+sd_question(
+  type  = 'mc',
+  id    = 'decide',
+  label = "I found it difficult to decide on my answers to the questions.",
+  option = c(
+    'Strongly disagree'          = 'stronglydisagree',
+    'Somewhat disagree'          = 'somewhatdisagree',
+    'Neither agree nor disagree'    = 'neitheragreenordisagree',
+    'Somewhat agree'     = 'somewhatagree',
+    'Strongly agree' = 'stronglyagree'
+  ),
+)
+
+
+sd_next()
+```
+:::
+
+::: {#demographics .sd-page}
+# Demographics Page
+
+## Nice job!
+
+We're almost done! We'd just like to ask just a few more questions about you which we will only use for analyzing our survey data.
+
+```{r}
+# Construct the list of years
+
+# Construct the list of years
+
+years <- as.character(2007:1920)
+names(years) <- years
+years <- c("Prefer not to say" = "prefer_not_say", years)
+
+sd_question(
+  type   = 'select',
+  id     = 'yob',
+  label  = "In what year were you born?",
+  option = years
+)
+
+
+genders <- c(
+  "Male"                     = "male",
+  "Female"                   = "female", 
+  "Trans-gender"     = "trans_gender",
+  "Non-binary"               = "non_binary",
+  "Prefer not to say"        = "prefer_not_to_say",
+  "Other"                    = "other"
+)
+
+sd_question(
+  type   = 'select',
+  id     = 'gender',
+  label  = "What gender do you identify as?",
+  option = genders
+)
+
+races <- c(
+  "White"  = "white",
+  "Black"                 = "black",
+  "Asian"                                     = "asian",
+  "Mixed"                        = "mixed",
+  "Other"          = "other"
+)
+
+sd_question(
+  type   = 'select',
+  id     = 'race',
+  label  = "What is your ethnic group?",
+  option = races
+)
+
+weight <- c(
+  "Normal weight"    = "normalweight",
+  "Underweight"   = "underweight",
+  "Overweight"   = "overweight",
+  "Obese"   = "obese",
+  "Prefer not to say"   = "prefernottosay"
+)
+
+sd_question(
+  type   = 'select',
+  id     = 'weight',
+  label  = "What is your weight status?",
+  option = weight
+)
+
+educations <- c(
+  "Degree" = "degree",
+  "Higher education below degree"           = "higher_ed",
+  "A-Level/AS-Level"          = "a_level",
+  "GCSE grade A* - C (9 - 4 since 2018)"    = "gcseA_C",
+  "GCSE Grade D - G (4 - 1 since 2018)"     = "gcseD_G",
+  "Other"       = "other"
+)
+
+sd_question(
+  type   = 'select',
+  id     = 'education',
+  label  = "Please select the highest educational qualification (or equivalent) that you have attained.",
+  option = educations
+)
+
+
+occupations <- c(
+  "Full-time" = "fulltime",
+  "Not in paid work"           = "notpaid",
+  "Part-time"          = "parttime",
+  "Not stated"    = "notstated",
+  "Unemployed"     = "unemployed",
+  "Other"       = "other",
+  "Due to start new job"       = "newjob",
+  "Student"       = "student"
+)
+
+sd_question(
+  type   = 'select',
+  id     = 'occupation',
+  label  = "Which of the following best describes your current employment status?",
+  option = occupations
+)
+
+sd_next()
+
+```
+:::
+
+
+::: {#end_normal .sd-page}
+# End Page
+
+The survey is finished. Thank you for your feedback!
+
+Please click the button below to complete your participation
+
+```{r}
+sd_redirect(
+  id = "redirect1",
+  url = "https://app.prolific.com/submissions/complete?cc=CEUUKQP3",
+  label = "Return to Prolific",
+  button = TRUE,
+  newtab = TRUE
+)
+
+```
+:::
+
+
+::: {#end_consent .sd-page}
+# End Page
+
+The survey is now finished. You may close the window.
+
+```{r}
+sd_redirect(
+  id = "redirect2",
+  url = "https://app.prolific.com/submissions/complete?cc=CGNYKAQS", # insert denied consent link
+  label = "Return to Prolific",
+  button = TRUE,
+  newtab = TRUE
+)
+```
+:::
+
+::: {#end_screenout .sd-page}
+# End Page
+
+Sorry, we wanted you to select the **red** button.
+
+The survey is now finished. You may close the window.
+
+```{r}
+sd_close()
+sd_redirect(
+  id = "redirect3",
+  url = "https://app.prolific.com/submissions/complete?cc=C1UW3U1U", # insert attention check link
+  label = "Return to Prolific",
+  button = TRUE,
+  newtab = TRUE
+)
+```
+:::
+
+
